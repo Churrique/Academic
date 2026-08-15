@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning App - Control de Estudios</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            color: #2c3e50;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            font-weight: 300;
+            font-size: 2.8rem;
+            color: #1a5276;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: #f9fbfd;
+            border-left: 5px solid #2980b9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .card h3 {
+            color: #1a5276;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #eaeef2;
+            padding-bottom: 8px;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card ul li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #ecf0f1;
+            font-size: 0.95rem;
+        }
+        .card ul li:last-child { border: none; }
+        .badge {
+            background: #2980b9;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .timeline {
+            margin: 40px 0 20px;
+            background: #eaf2f8;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .timeline h2 {
+            font-weight: 300;
+            color: #1a5276;
+        }
+        .bar {
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            height: 30px;
+            margin: 15px 0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transition: width 0.6s ease;
+        }
+        .seg1 { background: #3498db; width: 20%; }
+        .seg2 { background: #2ecc71; width: 25%; }
+        .seg3 { background: #f39c12; width: 30%; }
+        .seg4 { background: #e74c3c; width: 15%; }
+        .seg5 { background: #9b59b6; width: 10%; }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .legend span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .color-box {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaeef2;
+            padding-top: 20px;
+        }
+        .animate {
+            animation: fadeInUp 0.8s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📚 Planning App · Control de Estudios</h1>
+    <div class="subtitle">Planificación integral para el sistema de récord académico</div>
+
+    <div class="grid">
+        <div class="card animate">
+            <h3>🎯 Objetivo</h3>
+            <ul>
+                <li>Gestionar inscripción, evaluación continua, exámenes finales y récord académico.</li>
+                <li>Flujo de trabajo optimizado para roles: Control de Estudios, Docentes y Alumnos.</li>
+                <li>Acceso web responsive (móvil, tablet, escritorio).</li>
+            </ul>
+        </div>
+        <div class="card animate" style="border-left-color:#27ae60;">
+            <h3>🧩 Módulos principales</h3>
+            <ul>
+                <li><span class="badge">1</span> Gestión de Alumnos (inscripción, prelación, agrupación)</li>
+                <li><span class="badge">2</span> Evaluación Continua (planificación, transcripción)</li>
+                <li><span class="badge">3</span> Exámenes Finales (planificación, notas)</li>
+                <li><span class="badge">4</span> Reportes y envíos (correo, impresión)</li>
+                <li><span class="badge">5</span> Comunicación (chat institucional)</li>
+            </ul>
+        </div>
+        <div class="card animate" style="border-left-color:#e67e22;">
+            <h3>👥 Roles y permisos</h3>
+            <ul>
+                <li><strong>Control de Estudios / Dir. Académica</strong> – verificación, publicación de notas, gestión total.</li>
+                <li><strong>Docente</strong> – planifica evaluaciones, registra notas (con verificación posterior).</li>
+                <li><strong>Alumno</strong> – consulta récord, recibe notificaciones, visualiza notas.</li>
+            </ul>
+        </div>
+        <div class="card animate" style="border-left-color:#8e44ad;">
+            <h3>🗄️ Base de Datos</h3>
+            <ul>
+                <li>Motor: <strong>PostgreSQL 15</strong> (open source).</li>
+                <li>Tablas con <code>id</code> autoincrementable, historial de transacciones (auditoría).</li>
+                <li>Campos específicos en alumnos: <code>registration_process</code>, <code>continuing_education_program</code>, <code>course_of_study</code>.</li>
+            </ul>
+        </div>
+        <div class="card animate" style="border-left-color:#1abc9c;">
+            <h3>🛠️ Tecnologías</h3>
+            <ul>
+                <li><strong>Framework web:</strong> Astro (con React/Vue opcional).</li>
+                <li><strong>Backend:</strong> API REST (Node.js / Express) o Astro endpoints.</li>
+                <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript (con soporte para PWA).</li>
+                <li><strong>Internacionalización:</strong> Español (default), Inglés, Checo.</li>
+            </ul>
+        </div>
+        <div class="card animate" style="border-left-color:#e74c3c;">
+            <h3>📋 Reportes y personalización</h3>
+            <ul>
+                <li>Encabezado: hasta 5 líneas de 80 caracteres + logo.</li>
+                <li>Pie: hasta 3 líneas de 80 caracteres + logo.</li>
+                <li>Tabla <code>report_customization</code> para guardar configuraciones.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="timeline">
+        <h2>⏳ Cronograma estimado (semanas)</h2>
+        <div class="bar">
+            <div class="segment seg1">Análisis</div>
+            <div class="segment seg2">Diseño BD</div>
+            <div class="segment seg3">Desarrollo Backend</div>
+            <div class="segment seg4">Frontend</div>
+            <div class="segment seg5">Pruebas</div>
+        </div>
+        <div class="legend">
+            <span><span class="color-box" style="background:#3498db;"></span> Sem 1</span>
+            <span><span class="color-box" style="background:#2ecc71;"></span> Sem 2-3</span>
+            <span><span class="color-box" style="background:#f39c12;"></span> Sem 4-6</span>
+            <span><span class="color-box" style="background:#e74c3c;"></span> Sem 7-8</span>
+            <span><span class="color-box" style="background:#9b59b6;"></span> Sem 9</span>
+        </div>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; margin-top:30px;">
+        <div style="flex:1; min-width:200px; background:#ecf9f9; padding:15px; border-radius:10px;">
+            <h4 style="color:#1a5276;">📌 Flujo de trabajo clave</h4>
+            <ol style="padding-left:20px; line-height:1.8;">
+                <li>Inscripción de alumnos (con prelación opcional).</li>
+                <li>Agrupación por año y sección.</li>
+                <li>Docente planifica evaluaciones continuas (con nota mínima y descripción).</li>
+                <li>Docente transcribe notas → pasa a Control de Estudios para verificación.</li>
+                <li>Control de Estudios publica notas finales.</li>
+                <li>Planificación de exámenes finales.</li>
+                <li>Envío de récord por email e impresión de constancias.</li>
+            </ol>
+        </div>
+        <div style="flex:1; min-width:200px; background:#fef9e7; padding:15px; border-radius:10px;">
+            <h4 style="color:#1a5276;">💬 Área común (Chat)</h4>
+            <ul style="padding-left:20px; line-height:1.8;">
+                <li>Mensajes públicos entre autoridades y docentes.</li>
+                <li>Histórico completo de publicaciones.</li>
+                <li>Notificaciones de resultados, avisos importantes.</li>
+            </ul>
+        </div>
+        <div style="flex:1; min-width:200px; background:#fdedec; padding:15px; border-radius:10px;">
+            <h4 style="color:#1a5276;">🔒 Restricciones clave</h4>
+            <ul style="padding-left:20px; line-height:1.8;">
+                <li>Docente no publica notas sin verificación de Control de Estudios.</li>
+                <li>Evaluación continua: campo descripción obligatorio.</li>
+                <li>Campos de nombre y apellido limitados a 15 caracteres (dos cada uno).</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Planning App v1.0 · Generado para el proyecto de Control de Estudios</p>
+    </div>
+</div>
+<script>
+    // Animación adicional al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = (index * 0.1) + 's';
+        });
+    });
+</script>
+</body>
+</html>

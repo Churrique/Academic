@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diccionario de Datos - Control de Estudios</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background: #f0f3f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            font-weight: 300;
+            color: #1a5276;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .er-diagram {
+            background: #f9fbfd;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+        .er-diagram svg {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .table-grid {
+            margin-bottom: 40px;
+            border: 1px solid #dce1e8;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .table-grid h3 {
+            background: #1a5276;
+            color: white;
+            padding: 12px 20px;
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        .table-grid table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .table-grid th {
+            background: #eaf2f8;
+            text-align: left;
+            padding: 10px 15px;
+            color: #1a5276;
+            border-bottom: 2px solid #b0c4d9;
+        }
+        .table-grid td {
+            padding: 8px 15px;
+            border-bottom: 1px solid #eaeef2;
+        }
+        .table-grid tr:last-child td { border-bottom: none; }
+        .table-grid tr:hover td { background: #f5f8fa; }
+        .fk { color: #c0392b; font-weight: bold; }
+        .pk { color: #2980b9; font-weight: bold; }
+        .index { color: #27ae60; font-weight: bold; }
+        .badge {
+            display: inline-block;
+            background: #2980b9;
+            color: white;
+            padding: 1px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+        .note {
+            background: #fef9e7;
+            padding: 10px 20px;
+            border-left: 4px solid #f39c12;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        @media (max-width: 600px) {
+            .table-grid table { font-size: 0.75rem; }
+            .table-grid th, .table-grid td { padding: 5px 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📖 Diccionario de Datos · Sistema de Control de Estudios</h1>
+
+    <!-- Diagrama ER (simplificado) -->
+    <div class="er-diagram">
+        <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Entidades -->
+            <rect x="20" y="20" width="120" height="50" fill="#3498db" rx="8" />
+            <text x="80" y="50" fill="white" text-anchor="middle" font-size="14">Alumnos</text>
+
+            <rect x="200" y="20" width="120" height="50" fill="#2ecc71" rx="8" />
+            <text x="260" y="50" fill="white" text-anchor="middle" font-size="14">Materias</text>
+
+            <rect x="380" y="20" width="120" height="50" fill="#f39c12" rx="8" />
+            <text x="440" y="50" fill="white" text-anchor="middle" font-size="14">Inscripciones</text>
+
+            <rect x="560" y="20" width="120" height="50" fill="#9b59b6" rx="8" />
+            <text x="620" y="50" fill="white" text-anchor="middle" font-size="14">Evaluaciones</text>
+
+            <rect x="740" y="20" width="120" height="50" fill="#e74c3c" rx="8" />
+            <text x="800" y="50" fill="white" text-anchor="middle" font-size="14">Notas</text>
+
+            <rect x="200" y="150" width="120" height="50" fill="#1abc9c" rx="8" />
+            <text x="260" y="180" fill="white" text-anchor="middle" font-size="14">Profesores</text>
+
+            <rect x="380" y="150" width="120" height="50" fill="#e67e22" rx="8" />
+            <text x="440" y="180" fill="white" text-anchor="middle" font-size="14">Secciones</text>
+
+            <rect x="560" y="150" width="120" height="50" fill="#34495e" rx="8" />
+            <text x="620" y="180" fill="white" text-anchor="middle" font-size="14">Chat</text>
+
+            <!-- Relaciones (líneas) -->
+            <line x1="140" y1="45" x2="200" y2="45" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="165" y="35" font-size="10" fill="#2c3e50">N</text>
+            <text x="180" y="60" font-size="10" fill="#2c3e50">1</text>
+
+            <line x1="320" y1="45" x2="380" y2="45" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="345" y="35" font-size="10" fill="#2c3e50">N</text>
+            <text x="360" y="60" font-size="10" fill="#2c3e50">1</text>
+
+            <line x1="500" y1="45" x2="560" y2="45" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="525" y="35" font-size="10" fill="#2c3e50">1</text>
+            <text x="540" y="60" font-size="10" fill="#2c3e50">N</text>
+
+            <line x1="680" y1="45" x2="740" y2="45" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="705" y="35" font-size="10" fill="#2c3e50">N</text>
+            <text x="720" y="60" font-size="10" fill="#2c3e50">1</text>
+
+            <line x1="260" y1="70" x2="260" y2="150" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="270" y="110" font-size="10" fill="#2c3e50">1</text>
+            <text x="240" y="120" font-size="10" fill="#2c3e50">N</text>
+
+            <line x1="440" y1="70" x2="440" y2="150" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="450" y="110" font-size="10" fill="#2c3e50">1</text>
+            <text x="420" y="120" font-size="10" fill="#2c3e50">N</text>
+
+            <line x1="620" y1="70" x2="620" y2="150" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4" />
+            <text x="630" y="110" font-size="10" fill="#2c3e50">1</text>
+            <text x="600" y="120" font-size="10" fill="#2c3e50">N</text>
+        </svg>
+        <p style="text-align:center; color:#7f8c8d; margin-top:10px; font-size:0.9rem;">Diagrama Entidad-Relación simplificado (principales tablas)</p>
+    </div>
+
+    <!-- Tablas -->
+    <!-- Alumnos -->
+    <div class="table-grid">
+        <h3>Alumnos</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador único</td></tr>
+                <tr><td>first_name</td><td>VARCHAR</td><td>15</td><td>-</td><td>-</td><td>Primer nombre</td></tr>
+                <tr><td>second_name</td><td>VARCHAR</td><td>15</td><td>-</td><td>-</td><td>Segundo nombre</td></tr>
+                <tr><td>first_surname</td><td>VARCHAR</td><td>15</td><td>-</td><td>-</td><td>Primer apellido</td></tr>
+                <tr><td>second_surname</td><td>VARCHAR</td><td>15</td><td>-</td><td>-</td><td>Segundo apellido</td></tr>
+                <tr><td>registration_process</td><td>CHAR(2)</td><td>2</td><td>'XD'</td><td><span class="index">Índice</span></td><td>MA, EQ, CT, BE, NA, OT, XD</td></tr>
+                <tr><td>continuing_education_program</td><td>CHAR(2)</td><td>2</td><td>'RE'</td><td><span class="index">Índice</span></td><td>RE, RP, EP</td></tr>
+                <tr><td>course_of_study</td><td>CHAR(2)</td><td>2</td><td>'AN'</td><td><span class="index">Índice</span></td><td>AN, TR, ST</td></tr>
+                <tr><td>email</td><td>VARCHAR</td><td>100</td><td>-</td><td>-</td><td>Correo electrónico</td></tr>
+                <tr><td>created_at</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td>-</td><td>Fecha de creación</td></tr>
+                <tr><td>updated_at</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td>-</td><td>Última modificación</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Materias -->
+    <div class="table-grid">
+        <h3>Materias</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>code</td><td>VARCHAR</td><td>20</td><td>-</td><td><span class="index">Índice único</span></td><td>Código de materia</td></tr>
+                <tr><td>name</td><td>VARCHAR</td><td>100</td><td>-</td><td>-</td><td>Nombre de la materia</td></tr>
+                <tr><td>credits</td><td>INTEGER</td><td>-</td><td>0</td><td>-</td><td>Número de créditos</td></tr>
+                <tr><td>description</td><td>TEXT</td><td>-</td><td>-</td><td>-</td><td>Descripción</td></tr>
+                <tr><td>created_at</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td>-</td><td>Fecha creación</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Inscripciones (relación Alumno-Materia) -->
+    <div class="table-grid">
+        <h3>Inscripciones</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>alumno_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Alumnos)</span></td><td>Referencia al alumno</td></tr>
+                <tr><td>materia_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Materias)</span></td><td>Referencia a la materia</td></tr>
+                <tr><td>periodo</td><td>VARCHAR</td><td>20</td><td>-</td><td><span class="index">Índice</span></td><td>Periodo académico (ej. 2025-1)</td></tr>
+                <tr><td>fecha_inscripcion</td><td>DATE</td><td>-</td><td>now()</td><td>-</td><td>Fecha de inscripción</td></tr>
+                <tr><td>prelacion_aplicada</td><td>BOOLEAN</td><td>-</td><td>false</td><td>-</td><td>Indica si se aplicó prelación</td></tr>
+                <tr><td>seccion_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Secciones)</span></td><td>Sección asignada</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Profesores -->
+    <div class="table-grid">
+        <h3>Profesores</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>first_name</td><td>VARCHAR</td><td>15</td><td>-</td><td>-</td><td>Nombre</td></tr>
+                <tr><td>last_name</td><td>VARCHAR</td><td>15</td><td>-</td><td>-</td><td>Apellido</td></tr>
+                <tr><td>email</td><td>VARCHAR</td><td>100</td><td>-</td><td>-</td><td>Correo</td></tr>
+                <tr><td>department</td><td>VARCHAR</td><td>50</td><td>-</td><td>-</td><td>Departamento</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Evaluaciones Continuas -->
+    <div class="table-grid">
+        <h3>Evaluaciones_Continuas</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>materia_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Materias)</span></td><td>Materia asociada</td></tr>
+                <tr><td>profesor_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Profesores)</span></td><td>Profesor que planifica</td></tr>
+                <tr><td>titulo</td><td>VARCHAR</td><td>100</td><td>-</td><td>-</td><td>Título de la evaluación</td></tr>
+                <tr><td>descripcion</td><td>TEXT</td><td>-</td><td>-</td><td>-</td><td>Descripción obligatoria</td></tr>
+                <tr><td>fecha_limite</td><td>DATE</td><td>-</td><td>-</td><td>-</td><td>Fecha límite de entrega</td></tr>
+                <tr><td>nota_minima_aprobatoria</td><td>NUMERIC(5,2)</td><td>-</td><td>10.00</td><td>-</td><td>Nota mínima para aprobar</td></tr>
+                <tr><td>estado</td><td>VARCHAR</td><td>20</td><td>'pendiente'</td><td>-</td><td>pendiente, publicada, cerrada</td></tr>
+                <tr><td>created_at</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td>-</td><td>Fecha creación</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Notas (transcripción) -->
+    <div class="table-grid">
+        <h3>Notas</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>alumno_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Alumnos)</span></td><td>Alumno</td></tr>
+                <tr><td>evaluacion_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Evaluaciones_Continuas)</span></td><td>Evaluación asociada</td></tr>
+                <tr><td>nota</td><td>NUMERIC(5,2)</td><td>-</td><td>-</td><td>-</td><td>Nota obtenida</td></tr>
+                <tr><td>observacion</td><td>TEXT</td><td>-</td><td>-</td><td>-</td><td>Observaciones adicionales</td></tr>
+                <tr><td>verificada</td><td>BOOLEAN</td><td>-</td><td>false</td><td>-</td><td>Verificada por Control de Estudios</td></tr>
+                <tr><td>fecha_registro</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td>-</td><td>Fecha de registro</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Secciones -->
+    <div class="table-grid">
+        <h3>Secciones</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>nombre</td><td>VARCHAR</td><td>20</td><td>-</td><td>-</td><td>Nombre de sección (ej. "A", "B")</td></tr>
+                <tr><td>anio</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="index">Índice</span></td><td>Año académico</td></tr>
+                <tr><td>profesor_guia_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="fk">FK (Profesores)</span></td><td>Profesor guía</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Chat -->
+    <div class="table-grid">
+        <h3>Chat_Comun</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>usuario_id</td><td>INTEGER</td><td>-</td><td>-</td><td>-</td><td>ID del usuario (alumno, profe, admin)</td></tr>
+                <tr><td>rol</td><td>VARCHAR</td><td>20</td><td>-</td><td>-</td><td>Rol del usuario que publica</td></tr>
+                <tr><td>mensaje</td><td>TEXT</td><td>-</td><td>-</td><td>-</td><td>Contenido del mensaje</td></tr>
+                <tr><td>fecha</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td><span class="index">Índice</span></td><td>Fecha de publicación</td></tr>
+                <tr><td>importante</td><td>BOOLEAN</td><td>-</td><td>false</td><td>-</td><td>Mensaje destacado</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Report Customization -->
+    <div class="table-grid">
+        <h3>report_customization</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>header_line1</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 1 del encabezado</td></tr>
+                <tr><td>header_line2</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 2 del encabezado</td></tr>
+                <tr><td>header_line3</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 3 del encabezado</td></tr>
+                <tr><td>header_line4</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 4 del encabezado</td></tr>
+                <tr><td>header_line5</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 5 del encabezado</td></tr>
+                <tr><td>footer_line1</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 1 del pie</td></tr>
+                <tr><td>footer_line2</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 2 del pie</td></tr>
+                <tr><td>footer_line3</td><td>VARCHAR</td><td>80</td><td>''</td><td>-</td><td>Línea 3 del pie</td></tr>
+                <tr><td>header_logo</td><td>BYTEA</td><td>-</td><td>-</td><td>-</td><td>Logo del encabezado (imagen)</td></tr>
+                <tr><td>footer_logo</td><td>BYTEA</td><td>-</td><td>-</td><td>-</td><td>Logo del pie (imagen)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Auditoría (historial) -->
+    <div class="table-grid">
+        <h3>Auditoría (historial de transacciones)</h3>
+        <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Longitud</th><th>Defecto</th><th>PK/FK/Índice</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>id</td><td>INTEGER</td><td>-</td><td>autoinc</td><td><span class="pk">PK</span></td><td>Identificador</td></tr>
+                <tr><td>tabla_afectada</td><td>VARCHAR</td><td>50</td><td>-</td><td><span class="index">Índice</span></td><td>Nombre de la tabla</td></tr>
+                <tr><td>registro_id</td><td>INTEGER</td><td>-</td><td>-</td><td><span class="index">Índice</span></td><td>ID del registro afectado</td></tr>
+                <tr><td>operacion</td><td>CHAR(1)</td><td>1</td><td>-</td><td>-</td><td>I=Insert, U=Update, D=Delete</td></tr>
+                <tr><td>usuario</td><td>VARCHAR</td><td>50</td><td>-</td><td>-</td><td>Usuario que realizó la operación</td></tr>
+                <tr><td>fecha_hora</td><td>TIMESTAMP</td><td>-</td><td>now()</td><td>-</td><td>Marca de tiempo</td></tr>
+                <tr><td>datos_anteriores</td><td>JSONB</td><td>-</td><td>-</td><td>-</td><td>Estado antes del cambio (para U/D)</td></tr>
+                <tr><td>datos_nuevos</td><td>JSONB</td><td>-</td><td>-</td><td>-</td><td>Estado después del cambio (para I/U)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        <strong>Nota:</strong> Todas las tablas incluyen un campo <code>id</code> autoincrementable. Se han definido índices para campos de búsqueda frecuente. El historial de transacciones se gestiona mediante triggers en cada tabla.
+    </div>
+</div>
+</body>
+</html>
