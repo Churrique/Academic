@@ -1,0 +1,26 @@
+{
+  "name": "Academic",
+  "version": "1.0.0",
+  "description": "Sistema para el Registro y Control del Record Académico.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "astro dev",
+    "buil": "astro buil",
+    "preview": "astro preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^12.3.4",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "dependencies": {
+    "astro": "^7.3.1"
+  }
+}
