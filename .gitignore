@@ -54,3 +54,7 @@ DBeaver-IDE/*
 .megaignore
 
 node_modules/*
+
+.ini_setup/*
+
+!.gitignore
